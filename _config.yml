@@ -1,0 +1,20 @@
+title: "Your Blog Title"
+url: "https://yourdomain.com"
+baseurl: ""
+
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "default" # air, contrast, dark, dirt, mint, sunrise, aqua, neon, plum
+
+author:
+  name: "Fatima"
+  bio: "Backend developer. Writing about software, systems, and things that matter."
+
+permalink: /:year/:month/:day/:title/
+paginate: 10
+paginate_path: /page:num/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-include-cache
