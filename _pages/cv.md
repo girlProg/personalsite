@@ -7,10 +7,21 @@ author_profile: true
 
 Fatima I. Galaudu
 Software Engineer
-f.galaudu@gmail.com  · +44 (0) 7543741314  LinkedIn  ·    Personal Site   ·   GitHub
 
 ## PROFILE
 Backend-heavy Fullstack Developer with years experience building with Python Django and React and Redux. Also with a a keen interest in building robust and scalable applications.
+
+## SKILLS
+
+**Languages:** Python, JavaScript, PHP, SQL
+
+**Frameworks & Libraries:** Django, Django REST Framework, React, Redux, React Native, Next.js, pandas
+
+**Databases:** MySQL, PostgreSQL, Google Firestore, CouchDB
+
+**Tools & Infra:** Docker, Nginx, Gunicorn, CI/CD, GitHub Actions, KoboToolbox, REST APIs
+
+**Other:** Legacy system maintenance, data cleaning & transformation, end-to-end project delivery, team leadership
 
 ## EDUCATION
 
@@ -67,14 +78,3 @@ Stack: Django · DRF · React Native
 
 Built the full backend API from scratch for an eBay-style marketplace, integrated with pre-existing iOS and Android UIs. Shipped to both the App Store and Google Play.
 
-## SKILLS
-
-**Languages:** Python, JavaScript, PHP, SQL
-
-**Frameworks & Libraries:** Django, Django REST Framework, React, Redux, React Native, Next.js, pandas
-
-**Databases:** MySQL, PostgreSQL, Google Firestore
-
-**Tools & Infra:** Docker, Nginx, Gunicorn, CI/CD, GitHub Actions, KoboToolbox, REST APIs
-
-**Other:** Legacy system maintenance, data cleaning & transformation, end-to-end project delivery, team leadership
