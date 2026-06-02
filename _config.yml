@@ -5,7 +5,7 @@ url: "https://portfolio.yedite.ch"
 baseurl: ""
 
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "light"
+minimal_mistakes_skin: "mint"
 
 author:
   name: "Fatima Galaudu"
