@@ -4,9 +4,11 @@ description: "Backend developer. Python, Django, systems."
 url: "https://portfolio.yedite.ch"
 baseurl: ""
 
+sass:
+  sass_dir: _sass
+
 include:
   - _pages
-
 
 theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: "dirt"
