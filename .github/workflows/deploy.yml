@@ -28,7 +28,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.OPALSTACK_HOST }}
-          username: ${{ secrets.OPALSTACK_USER }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.OPALSTACK_SSH_KEY }}
           source: "_site/*"
           target: ${{ secrets.APP_DIR }}
