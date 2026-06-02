@@ -24,12 +24,11 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      - name: Deploy to Opalstack via rsync
-        uses: burntsushi/rsync-deployments@v1
+      - name: Deploy to Opalstack
+        uses: appleboy/scp-action@v0.1.7
         with:
-          switches: -avzr --delete
-          path: _site/
-          remote_path: /home/yourusername/apps/blog/
-          remote_host: ${{ secrets.OPALSTACK_HOST }}
-          remote_user: ${{ secrets.USER }}
-          remote_key: ${{ secrets.OPALSTACK_SSH_KEY }}
+          host: ${{ secrets.OPALSTACK_HOST }}
+          username: ${{ secrets.OPALSTACK_USER }}
+          key: ${{ secrets.OPALSTACK_SSH_KEY }}
+          source: "_site/*"
+          target: ${{ secrets.APP_DIR }}
