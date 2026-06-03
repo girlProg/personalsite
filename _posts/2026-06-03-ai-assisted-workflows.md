@@ -35,17 +35,17 @@ The problem with this approach wasn't the output — it was the friction. Runnin
 
 ## The New Approach: Vibe Coding a Dashboard I'd Throw Away
 
-That calculus changed in 2026. With Claude Code, building a dashboard no longer meant days of scaffolding. I could describe what I wanted, iterate quickly, and end up with something genuinely useful — even for a one-week job.
+That calculus changed in 2026. With Claude Code, building a dashboard no longer meant days of running the same old script with limited insights. I could describe what I wanted, iterate quickly, and end up with something genuinely useful even for a one-week job.
 
 I started with a clear list of requirements:
 
 - Number of schools visited vs. total expected
-- Percentage of enumerators who had submitted at least one form (we'd had cases where one person in a two-person team did all the work, and both got paid — I wanted to catch that early)
+- Percentage of enumerators who had submitted at least one form (we'd had cases where one person in a two-person team did all the work, and both got paid, I wanted to catch that early)
 - Submission counts broken down by local government area
 - Submission counts broken down by individual enumerator
 - A map of GPS coordinates from submissions, so I could visually confirm geographic spread
 
-Before writing a single line of code, I fed Claude Code the actual KoboToolbox form. This was important — the form defined the data structure, and having Claude read it directly meant I didn't have to translate field names or explain the shape of the API response. It could infer the right column names, understand which fields held GPS data, and scaffold the data-fetching logic with the correct structure from the start.
+Before writing a single line of code, I fed Claude Code the actual KoboToolbox form. This was important because the form defined the data structure, and having Claude read it directly meant I didn't have to translate field names or explain the shape of the API response. It could infer the right column names, understand which fields held GPS data, and scaffold the data-fetching logic with the correct structure from the start.
 
 My API token went into a `.env` file and Claude handled the rest of the setup.
 
@@ -53,7 +53,7 @@ The first draft was not good. The layout was cluttered, some of the percentage c
 
 ![Dashboard showing school visit statistics, enumerator activity, and submission counts by LGA](/assets/images/dashboard.png)
 
-As the week went on I kept adding to it. Daily submission rates became important when I needed to brief the field coordinator each morning — I could tell him not just how many submissions we had, but whether the pace was accelerating or slowing down, and who was driving it.
+As the week went on I kept adding to it. Daily submission rates became important when I needed to brief the field coordinator each morning, I could tell him how many submissions we had, if the pace was accelerating or slowing down, and who was driving it.
 
 ![Dashboard panel showing daily submission rate with per-enumerator breakdown](/assets/images/dashboard-daily.png)
 
@@ -61,16 +61,18 @@ As the week went on I kept adding to it. Daily submission rates became important
 
 A few things mattered more than I expected:
 
-**Giving the model the form upfront.** This single step probably saved an hour of back-and-forth on data structure. Claude didn't have to guess at field names or ask me to describe the schema.
+**Giving the model the form upfront.** This single step probably saved an hour of back-and-forth on data structure. I needed Claude to undertood the field names and schema. This avoids domain context errors when working with the data blindly. 
 
-**Accepting that the first draft is a starting point.** The dashboard that was useful on day five looked nothing like what I had at the end of hour one. Expecting a finished product from the first prompt is the wrong frame.
+**Accepting that the first draft is a starting point.** The dashboard that was useful on day five looked nothing like what I had at the end of hour one. The finished dashbord was closer to the end of the exercise. Iteration took minutes and data would instantly be live.
 
 ## The Limits
 
-This was a throwaway dashboard, and it was built like one. The code isn't tested, there's no error handling for API failures, and it would take real work to adapt it for a different form or a different project. That was an acceptable tradeoff for a five-day verification exercise. It would not be acceptable for anything long-lived.
+This was a throwaway dashboard, and it was built like one. The code isn't reviewd or tested, there's no error handling for API failures, and it would take real work to adapt it for a different form or a different project. That was an acceptable tradeoff for a five-day verification exercise. It would not be acceptable for anything long-lived.
 
 There's also a ceiling on what conversational iteration can do. When I hit a subtle bug in how the map was clustering overlapping GPS points, I eventually had to read the code myself and diagnose it directly. Claude could implement a fix once I understood the problem, but it couldn't find the problem on its own.
 
+I also had to run an independent analysis of the actual data using excel and a bit of python. just to verify data correctness of what Claude was producing.
+
 ## After the Exercise
 
-Once the data collection window closes, the dashboard gets shelved. The data goes through a cleaning process and then into our main MIS — a separate system that handles student attendance tracking and disbursement management across both states. The dashboard's job is just to get us through the week in good shape. In 2026, for the first time, it actually did.
+Once the data collection window closes, the dashboard gets shelved. The data goes through a cleaning process and then into our main MIS — a separate system that handles student attendance tracking and disbursement management across both states. The dashboard's job is just to get us through the week in good shape, and it actually did.
