@@ -3,3 +3,6 @@
 * AI assisted workflows - my kobo throw away dashboards
 * refactoring amaro and see how much my code needed change, modifying it carefully to align with legacy objects
 * Building thabaat 
+* dockerising attendease
+* adding monitoring to attendease
+* documenting attendease
