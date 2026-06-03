@@ -1,55 +1,78 @@
 ---
-title: "AI Assisted Workflows"
+title: "Building a Throwaway Dashboard with Claude Code"
 date: 2026-06-01
-categories: [ai, claude code, dashboards, kobotoolbox, agile, world bank]
+categories: [ai, claude code, kobotoolbox, agile, world bank]
 ---
 
-# Workflow Between 2023-2024 Using Matplotlib
+# Building a Throwaway Dashboard with Claude Code
 
-KoboToolbox provides a fairly informative dashboard to visualise the data collected by your field workers for any form. My primary use case is for student enrolment for the [AGILE (Adolescent Girls Initiative for Learning and Empowerment)](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099081425093029294) World Bank Programme.
+For the past few years I've been managing data collection for the [AGILE (Adolescent Girls Initiative for Learning and Empowerment)](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099081425093029294) programme, a World Bank initiative operating across two states in Nigeria. A core part of the work involves periodic verification exercises — sending enumerators into schools to confirm that the students we enrolled are still attending.
 
-We collect student data across 2 states independent of each other. During the last verification exercise of the enrolled students in one of the states, I found myself wondering about the statistics of the live data we were collecting. Although yet to be cleaned, it would nevertheless still be useful to know the estimated quality of the data and know ahead of time if we were meeting our goals. What makes this specifically ideal for a verification exercise is because you know ahead of time how many students, how many schools, etc you want to verify. So for example, we are verifying if 40,000 students across one state are in the schools they were at the time of enrolment, and we know that all those 40,000 students' data was collected across 350 schools spread around the state.
+These exercises are time-pressured and logistically complex. For a typical verification round we might have 40,000 students across 350 schools, a team of enumerators spread across multiple local government areas, and about a week to get it done. During that window, I need to know what's happening in near real-time: which schools have been visited, which enumerators are actually working, and whether the data coming in looks clean or has problems that need addressing before the exercise ends.
 
-In the early days of the project, I used to use Python scripts to check data collection status. I would connect to the KoboToolbox API and draw out graphs, output status documents and summaries for the field enumerators to answer to.
+## The Old Approach: Python Scripts on a Timer
+
+Until recently, my answer to this was a set of Python scripts that I'd run manually every few hours. They'd hit the KoboToolbox API, pull the latest submissions, and produce a bar chart showing percentage progress per local government area.
 
 ```python
 fig, ax = plt.subplots()
 bar_container = ax.bar(percentages.keys(), percentages.values())
 ax.set_ylabel('Percentage')
-ax.set_title(f'Cummulative Submission Progress as at {datetime.now().strftime("%H:%M on %d/%m/%Y")}')
-ax.set_ylim(0,140)
-plt.xticks(rotation = 25)
+ax.set_title(f'Cumulative Submission Progress as at {datetime.now().strftime("%H:%M on %d/%m/%Y")}')
+ax.set_ylim(0, 140)
+plt.xticks(rotation=25)
 ax.bar_label(bar_container)
 plt.show()
 ```
 
-And this would give me a graph with percentage progress for each local government.
+It was crude but it worked. The charts gave me an immediate read on progress and could surface anomalies — one state once showed 122% completion in a local government area, which was my first signal that I was dealing with duplicate submissions before I'd even started cleaning the data.
 
-![state graph](/assets/images/state.jpg)
+![Bar chart showing cumulative submission progress per local government area, one bar exceeding 100%](/assets/images/state.jpg)
 
-One state having 122% let me know that I was dealing with duplicate data, which I then had to reconcile and clean after the data collection exercise. Here's another from the next year which let me know I had no alarming levels of duplicate data.
+The following year, the same chart came back clean — no bar above 100%, no immediate red flags.
 
-![](/assets/images/state2.jpg)
+![Bar chart showing cumulative submission progress, all bars within expected range](/assets/images/state2.jpg)
 
-Building a dashboard was always going to be overkill for this process because the data collection period always ranged from a few days to 1 week, and the data wouldn't need to be visualised again for a long time. This was my process from 2023 till 2024.
+The problem with this approach wasn't the output — it was the friction. Running a script every few hours meant I was either checking too infrequently and missing things, or I was glued to my laptop running it constantly. A proper dashboard would have solved this, but building one felt like over-engineering a problem that only existed for five days.
 
-# Workflow in 2026 Using Claude Code
+## The New Approach: Vibe Coding a Dashboard I'd Throw Away
 
-Now to where AI comes in — building a dashboard became a lot easier than in the past. I could easily draw out live statistics on the data as it was being collected without needing to run a script every few hours. So I went straight into vibe coding to see what I could build. I was essentially looking to build a throw-away dashboard. Here are a few requirements I had when I started:
+That calculus changed in 2026. With Claude Code, building a dashboard no longer meant days of scaffolding. I could describe what I wanted, iterate quickly, and end up with something genuinely useful — even for a one-week job.
 
-* View the number of schools visited
-* Percentage of active enumerators (we have had cases in the past where only one enumerator was working in a local government area, but they both would get paid — we wanted to curb that)
-* Percentage of schools visited
-* A visual graph of locations visited using GPS data collected
-* How many submissions submitted per local government
-* How many submissions submitted per enumerator
+I started with a clear list of requirements:
 
-These were the starting requirements. I gave Claude Code my KoboToolbox form, which informed it on the structure of my data and how it would need to scaffold the project. I had my token in an `.env` file, and the first draft was disappointing — unfortunately I did not save screenshots. This is what I had at the end of about a 3 hour session of back and forth.
+- Number of schools visited vs. total expected
+- Percentage of enumerators who had submitted at least one form (we'd had cases where one person in a two-person team did all the work, and both got paid — I wanted to catch that early)
+- Submission counts broken down by local government area
+- Submission counts broken down by individual enumerator
+- A map of GPS coordinates from submissions, so I could visually confirm geographic spread
 
-![dashboard statistics](/assets/images/dashboard.png)
+Before writing a single line of code, I fed Claude Code the actual KoboToolbox form. This was important — the form defined the data structure, and having Claude read it directly meant I didn't have to translate field names or explain the shape of the API response. It could infer the right column names, understand which fields held GPS data, and scaffold the data-fetching logic with the correct structure from the start.
 
-It was amazingly useful and I kept adding features as we went, like daily rate of submissions and who was making those submissions.
+My API token went into a `.env` file and Claude handled the rest of the setup.
 
-![dashboard daily](/assets/images/dashboard-daily.png)
+The first draft was not good. The layout was cluttered, some of the percentage calculations were wrong, and the map wasn't rendering. But that's where the iteration loop paid off. Rather than debugging from scratch, I could describe what was wrong conversationally: *"the active enumerator percentage is counting users who submitted yesterday, not just today"* or *"the map markers are all landing in the ocean."* Each round of feedback produced a meaningful fix. After about three hours of back-and-forth, I had this:
 
-I love being able to see live statistics about the data as it's being collected, and the client loves it even more. After the week of data collection, I clean up the data and follow my ETL Pipeline for adding it to the MIS Dashboard for managing student attendance and disbursements.
+![Dashboard showing school visit statistics, enumerator activity, and submission counts by LGA](/assets/images/dashboard.png)
+
+As the week went on I kept adding to it. Daily submission rates became important when I needed to brief the field coordinator each morning — I could tell him not just how many submissions we had, but whether the pace was accelerating or slowing down, and who was driving it.
+
+![Dashboard panel showing daily submission rate with per-enumerator breakdown](/assets/images/dashboard-daily.png)
+
+## What Made This Work
+
+A few things mattered more than I expected:
+
+**Giving the model the form upfront.** This single step probably saved an hour of back-and-forth on data structure. Claude didn't have to guess at field names or ask me to describe the schema.
+
+**Accepting that the first draft is a starting point.** The dashboard that was useful on day five looked nothing like what I had at the end of hour one. Expecting a finished product from the first prompt is the wrong frame.
+
+## The Limits
+
+This was a throwaway dashboard, and it was built like one. The code isn't tested, there's no error handling for API failures, and it would take real work to adapt it for a different form or a different project. That was an acceptable tradeoff for a five-day verification exercise. It would not be acceptable for anything long-lived.
+
+There's also a ceiling on what conversational iteration can do. When I hit a subtle bug in how the map was clustering overlapping GPS points, I eventually had to read the code myself and diagnose it directly. Claude could implement a fix once I understood the problem, but it couldn't find the problem on its own.
+
+## After the Exercise
+
+Once the data collection window closes, the dashboard gets shelved. The data goes through a cleaning process and then into our main MIS — a separate system that handles student attendance tracking and disbursement management across both states. The dashboard's job is just to get us through the week in good shape. In 2026, for the first time, it actually did.
