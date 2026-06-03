@@ -4,8 +4,6 @@ date: 2026-06-01
 categories: [ai, claude code, kobotoolbox, agile, world bank]
 ---
 
-# Building a Throwaway Dashboard with Claude Code
-
 For the past few years I've been managing data collection for the [AGILE (Adolescent Girls Initiative for Learning and Empowerment)](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099081425093029294) programme, a World Bank initiative operating across two states in Nigeria. A core part of the work involves periodic verification exercises — sending enumerators into schools to confirm that the students we enrolled are still attending.
 
 These exercises are time-pressured and logistically complex. For a typical verification round we might have 40,000 students across 350 schools, a team of enumerators spread across multiple local government areas, and about a week to get it done. During that window, I need to know what's happening in near real-time: which schools have been visited, which enumerators are actually working, and whether the data coming in looks clean or has problems that need addressing before the exercise ends.
