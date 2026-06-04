@@ -1,4 +1,4 @@
-The ThinkCentre arrived, I couldn't stop until I had a full observability stack.
+The Lenovo ThinkCentre arrived, I couldn't stop until I had a full observability stack.
 If you've been following along, you know the T2 chip MacBook saga. That chapter is very much closed. I ended up with a brick. The ThinkCentre M80q arrived and I genuinely could not wait to get started. I unboxed it, plugged it in, and did not stop until I had a full observability stack running across two production apps. It was one of those nights.
 
 I had been wanting proper monitoring for Amaro for a while. `django-prometheus` was already installed, the middleware was in place, the `/metrics` endpoint was live. But nothing was collecting the data. It was just sitting there producing numbers into the void. I knew I needed a Prometheus server and Grafana, I just didn't have anywhere to run them. Until now.
@@ -16,7 +16,6 @@ The goal was to go from zero to a production-grade observability stack, but i di
 
 I'm going to be honest, I did not expect to finish all of this in one night. But here we are 😄, automation has really come a long way in computing.
 
-![photo: thinkcentre unboxed on the desk]
 
 **Proxmox First**
 
@@ -24,7 +23,7 @@ Flashed the ISO with Balena Etcher, booted from USB, spammed F12 for the boot me
 
 After the second install I could hit the Proxmox web UI from my laptop. That feeling never gets old honestly.
 
-![photo: Proxmox web UI on first login]
+
 
 **Tailscale on Proxmox**
 
@@ -79,7 +78,6 @@ resource "proxmox_virtual_environment_vm" "prometheus" {
 
 Ran `terraform apply` and watched both VMs appear in the Proxmox UI. Genuinely one of the most satisfying things I've seen in a while. Two machines, declared in code, provisioned in seconds.
 
-![photo: both VMs running in Proxmox UI]
 
 **Ansible**
 
@@ -147,7 +145,7 @@ The try/catch is important here. Monitoring code should never take down the appl
 
 Then I opened Grafana, added Prometheus as a data source, and started building dashboards. This part was genuinely exciting because I was looking at real production data for the first time.
 
-![photo: Grafana dashboard showing production metrics]
+![grafana graph](/assets/images/grafanagraoh.png)
 
 **What I Can See Now**
 
@@ -175,7 +173,6 @@ tailscale cert grafana.my-tailnet.ts.net
 
 Point Grafana at the cert files in `grafana.ini`, restart, done. Clean HTTPS with no self-signed certificate warnings.
 
-![photo: Grafana running on HTTPS]
 
 **What's Next**
 

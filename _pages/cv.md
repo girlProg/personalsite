@@ -40,7 +40,7 @@ Architect and deliver robust backend APIs and full-stack systems for clients acr
 
 Leads client discovery and requirements definition across distributed projects, translating stakeholder needs into technical specifications and delivery plans.
 
-Built ETL pipelines processing 400,000 beneficiary records from field collection (KoboToolbox) through Python/pandas cleaning and validation to MySQL — producing reports that directly informed World Bank disbursement decisions. Reducing
+Built ETL pipelines processing 400,000 beneficiary records from field collection (KoboToolbox) through Python/pandas cleaning and validation to MySQL — producing reports that directly informed World Bank disbursement decisions. 
 
 Handle all DevOps responsibilities: server provisioning, Nginx/Gunicorn configuration in Linux servers, CI/CD pipelines, and production infrastructure on VPS environments and deploying observability tools like Prometheus and Grafana.
 
