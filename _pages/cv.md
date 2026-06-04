@@ -19,7 +19,7 @@ Backend-heavy Fullstack Developer with years experience building with Python Dja
 
 **Databases:** MySQL, PostgreSQL, Google Firestore, CouchDB
 
-**Tools & Infra:** Docker, Nginx, Gunicorn, CI/CD, GitHub Actions, KoboToolbox, REST APIs
+**Tools & Infra:** Docker, Terraform, Ansible, Nginx, Gunicorn, CI/CD, GitHub Actions, KoboToolbox, REST APIs
 
 **Other:** Legacy system maintenance, data cleaning & transformation, end-to-end project delivery, team leadership
 
