@@ -1,6 +1,6 @@
 # ideas
 
-* AI assisted workflows - my kobo throw away dashboards
+* - done- AI assisted workflows - my kobo throw away dashboards
 * refactoring amaro and see how much my code needed change, modifying it carefully to align with legacy objects
 * Building thabaat 
 * profiling db requests and avoiding N+1 in django orm requests
