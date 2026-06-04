@@ -1,5 +1,4 @@
-# The ThinkCentre Arrived. Here's What I Built in One Night.
-
+The ThinkCentre arrived, I couldn't stop until I had a full observability stack.
 If you've been following along, you know the T2 chip MacBook saga. That chapter is very much closed. I ended up with a brick. The ThinkCentre M80q arrived and I genuinely could not wait to get started. I unboxed it, plugged it in, and did not stop until I had a full observability stack running across two production apps. It was one of those nights.
 
 I had been wanting proper monitoring for Amaro for a while. `django-prometheus` was already installed, the middleware was in place, the `/metrics` endpoint was live. But nothing was collecting the data. It was just sitting there producing numbers into the void. I knew I needed a Prometheus server and Grafana, I just didn't have anywhere to run them. Until now.
