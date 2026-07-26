@@ -1,14 +1,14 @@
 ---
-title: "Inheriting a Time Bomb: Rewriting a Legacy Attendance System Without Downtime"
+title: "Rewriting a Legacy CCT System Without Downtime"
 date: 2026-07-04
 tags: [django, drf, legacy-migration, nginx, postgres, docker]
 ---
 
-I inherited a production system I didn't build. There was no documentation and no handover, and the people who originally wrote it were long gone, so what I had to work with was a PHP and MySQL codebase and a list of things that kept breaking that only seemed to get longer.
+I inherited a production system from a consultant my client hired, there was no documentation and no handover. The people who originally wrote it left unceremoniously without regard for the clients work, so the client preferred if there was no contact made with this developer. I promised that was not a problem, cause how hard could it be figuring out how a codebase is wired. This is something i had done many times, its steep at first, but it gets really easy with time almost as if you wrote it. Afterall, even with code i write, i have to get familiar with it after months away from it. What I had to work with was a PHP and MySQL codebase.
 
-The problems were structural. The database wasn't normalised, so the same facts were duplicated across several tables, and depending on which one you read you could get a different answer to the same question. Attendance was the worst of it, because attendance is what the whole programme runs on: it decides which students are eligible for payment, and eligibility numbers that disagree with each other are not a cosmetic bug in a system that moves money to real people.
+It did not take a very long time before i saw this time it was different. I have always worked around engineers that worked with best practices, and i also did the same. So picking up where someone else left off was natural, cause the design patterns were identifiable and its easy to see what the developer was trying to achive. This codebase had structural problems. The database wasn't normalised (which i have never actually seen in any production database), so the same facts were duplicated across several tables, and depending on which one you read you could get a different answer to the same question. Attendance was the worst of it, because attendance is what the whole programme runs on: it decides which students are eligible for payment, and eligibility numbers that disagree with each other are not a cosmetic bug in a system that moves money to real people.
 
-I maintained it for a while, until I hit the point where every change I made caused more bugs than I could keep up with, with no tests to tell me what I'd broken and no documentation to tell me why the code was written the way it was. Code with no tests and no documentation is a time bomb, and the technical debt doesn't sit still, it builds faster than you can clear it. So I stopped patching and rewrote it.
+I maintained it for a while, wrote some tests in a bid to improve it, but I hit the point where every change I made caused more bugs than I could keep up with, with no tests to tell me what I'd broken and no documentation to tell me why the code was written the way it was. 
 
 This post is about how, because the interesting part isn't that I chose Django, it's the specific decisions that let me replace a live system without taking it down, and the ones I'd defend if someone asked me why I did it that way.
 
