@@ -1,0 +1,21 @@
+okhelp me, 
+
+
+
+the main reason i started this is because there are alot of vulnebilities with the current system. things randomly broke and the database was not normalised. there was alot of data duplication which led to a bloated and disorganised db. 
+
+
+
+i had decided to maintain it but it got to a point whre any modifications i made were creting more bugs than i could handle. without access to the previous developers, documentation etc. i thought php would be my largest hurdle, but after this, i would take a new language (even C++) over badly written code. i have now first hand experienced truly the cost of bad written code, without tests, without documentation. it really just a time bomb and the technical debt get overwhelming. 
+
+
+
+normalising databases is an easy task, so i scribbled that  on my ipad and got to prompting claude the structure each model had and what i want it to do. it was essential to use clause cause its a production system so i was racing against time before the next bug crawled up and i did not have any idea wher to start looking. I had the entire codebase(both frontend and backend) mapped out. because this was something i had wanted to do for a long time. 
+
+
+
+i went with django cookie cutter using docker cause i wanted to be able to extend the applications functionality anf the VPS it was runing on was hefty enough to handle any workload thrown at it. And for thte frontend, i went for a bare vite app using schadcn components to bootsrap development. there as no need for a NEXTjs app cause its behind a login screen. i dont need seo or any SSR. 
+
+
+
+the migration plan: the only data enterend into the db is the attendance data, everyting else is readonly. so the django - postgrs db will be the main attendance database in the beginnign. i will migrate all attendance data gradually. the attendance menu on the sidebar would be the only link that will lnk to the new application for now. i made them look as identical as possible. all in the sprit of backward compatibility and making sure it looks similar enough not to disrupt the flow of the data collectors. But just so the client knows its new, when its fully done, i will change out some of the colors for a new one and probably also change the logo. 

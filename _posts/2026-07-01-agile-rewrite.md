@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Inheriting a Time Bomb: Rewriting a Legacy Attendance System Without Downtime"
 date: 2026-07-04
 tags: [django, drf, legacy-migration, nginx, postgres, docker]
